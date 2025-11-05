@@ -1,0 +1,45 @@
+- hosts: webserver
+  become: yes
+  tasks:
+    - name: Install Docker and dependencies
+      yum:
+        name:
+          - docker
+          - python3
+          - python3-pip
+          - awscli
+        state: present
+
+    - name: Ensure Docker service is running
+      service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Login to AWS ECR
+      shell: |
+        aws ecr get-login-password --region ap-south-1 | \
+        docker login --username AWS --password-stdin 658245007190.dkr.ecr.ap-south-1.amazonaws.com
+      args:
+        executable: /bin/bash
+
+    - name: Pull roadmap-ai image from ECR
+      docker_image:
+        name: 658245007190.dkr.ecr.ap-south-1.amazonaws.com/roadmap-flask:latest
+        source: pull
+
+    - name: Stop old container (if any)
+      docker_container:
+        name: roadmap-ai-flask
+        state: absent
+
+    - name: Run roadmap-ai Flask container with environment variables
+      docker_container:
+        name: roadmap-ai-flask
+        image: 658245007190.dkr.ecr.ap-south-1.amazonaws.com/roadmap-flask:latest
+        ports:
+          - "80:8080"
+        env:
+          GOOGLE_API_KEY: "AIzaSyDBMjBIl909L_kB2aETBpWow_HdoXGNQL4"
+          FLASK_ENV: "production"
+        restart_policy: always

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Roadmap Generator | AI Mentor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .roadmap-box {
+      background-color: #f1f5f9;
+      border-radius: 12px;
+      padding: 1rem;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-x: auto;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="container">
+    <h1>AI Career Roadmap Generator</h1>
+    <form method="post">
+      <input type="text" name="goal" placeholder="e.g., Data Scientist, Cloud Engineer" required />
+      <button type="submit">Generate Roadmap</button>
+    </form>
+
+    {% if roadmap %}
+    <div class="card">
+      <h2>Roadmap for {{ goal }}</h2>
+      <div class="roadmap-box">{{ roadmap|safe }}</div>
+    </div>
+    {% endif %}
+  </main>
+
+  <footer>
+    <p>Powered by <strong>Gemini API</strong> · Built with Flask & Material Design 3</p>
+  </footer>
+</body>
+</html>

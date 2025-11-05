@@ -1,0 +1,78 @@
+:root {
+  --primary: #4f46e5;
+  --surface: #ffffff;
+  --background: #f9fafb;
+  --on-surface: #1e293b;
+  --radius: 14px;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background);
+  color: var(--on-surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 700px;
+  width: 100%;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+h1 {
+  text-align: center;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+form {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+input {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--radius);
+  font-size: 1rem;
+}
+
+button {
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #4338ca;
+}
+
+.card {
+  margin-top: 2rem;
+  background-color: #f1f5f9;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+footer {
+  margin-top: 2rem;
+  color: #6b7280;
+  font-size: 0.9rem;
+}

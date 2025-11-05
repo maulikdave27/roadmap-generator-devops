@@ -1,0 +1,6 @@
+Flask
+google-generativeai
+gunicorn
+pytest
+bandit
+markdown

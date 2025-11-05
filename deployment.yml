@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roadmap-ai-flask
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: roadmap-ai-flask
+  template:
+    metadata:
+      labels:
+        app: roadmap-ai-flask
+    spec:
+      containers:
+        - name: roadmap-ai-flask
+          image: yourdockeruser/roadmap-ai-flask:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: GEMINI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: gemini-secret
+                  key: api-key
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: roadmap-ai-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: roadmap-ai-flask
+  ports:
+    - port: 80
+      targetPort: 8080
